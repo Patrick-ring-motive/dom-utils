@@ -9,6 +9,19 @@ const NodeListFrom = (...args) => {
     Object.setPrototypeOf(nodes, args);
     return nodes;
 };
+
+const HTMLCollectionFrom = (...args) => {
+    const elements = document.createElement('HTMLCollection').children;
+    Object.defineProperty(elements, 'length', {
+        value: args,
+        configurable: true,
+        writable: true
+    });
+    Object.setPrototypeOf(args, HTMLCollection.prototype);
+    Object.setPrototypeOf(elements, args);
+    return elements;
+};
+
 const updateAttribute = (element, key, value) => {
     try {
         const oldValue = element.getAttribute(String(key));
