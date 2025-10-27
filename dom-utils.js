@@ -35,6 +35,18 @@ const querySelectorAll = (...args)=>{
   return document.createElement('NodeList').childNodes;
 };
 
+const getElementById = (...args)=>{
+  let [elem,id] = args;
+  try{
+    if(!elem?.getElementById){
+      [id,elem] = [elem,document];
+    }
+    return elem.getElementById(String(id));
+  }catch(e){
+    console.warn(e,...args);
+  }
+};
+
 const getElementsByTagName = (...args)=>{
   let [elem,tag] = args;
   try{
@@ -42,6 +54,45 @@ const getElementsByTagName = (...args)=>{
       [tag,elem] = [elem,document];
     }
     return elem.getElementsByTagName(String(tag));
+  }catch(e){
+    console.warn(e,...args);
+  }
+  return document.createElement('HTMLCollection').children;
+};
+
+const getElementsByTagNameNS = (...args)=>{
+  let [elem,tag] = args;
+  try{
+    if(!elem?.getElementsByTagNameNS){
+      [tag,elem] = [elem,document];
+    }
+    return elem.getElementsByTagNameNS(String(tag));
+  }catch(e){
+    console.warn(e,...args);
+  }
+  return document.createElement('HTMLCollection').children;
+};
+
+const getElementsByName = (...args)=>{
+  let [elem,name] = args;
+  try{
+    if(!elem?.getElementsByName){
+      [name,elem] = [elem,document];
+    }
+    return elem.getElementsByName(String(name));
+  }catch(e){
+    console.warn(e,...args);
+  }
+  return document.createElement('HTMLCollection').children;
+};
+
+const getElementsByClassName = (...args)=>{
+  let [elem,name] = args;
+  try{
+    if(!elem?.getElementsByClassName){
+      [name,elem] = [elem,document];
+    }
+    return elem.getElementsByClassName(String(name));
   }catch(e){
     console.warn(e,...args);
   }
